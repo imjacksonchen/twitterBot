@@ -38,4 +38,39 @@ except:
 #     print(follower.name)
 
 # Followers
-api.create_friendship("realpython")
+# api.create_friendship("realpython")
+
+# api.destroy_friendship("realpython")
+
+# User followers
+# followers = api.friends()
+# for follower in followers:
+#     print(follower.name)
+
+# Account description
+# api.update_profile(description = "I like food")
+
+# Likes; example likes the first tweet on the user's home timeline
+# tweets = api.home_timeline(count = 1)
+# tweet = tweets[0]
+# print(f"Liking tweet {tweet.id} of {tweet.author.name}")
+# api.create_favorite(tweet.id)
+
+# Blocking users; example prints out the people block for the user
+# for block in api.blocks():
+#     print(block.name)
+
+# Search
+# for tweet in api.search(q = "Python", lang = "en", rpp = 10):
+#     print(f"{tweet.user.name}:{tweet.text}")
+
+# Trends
+# trends_result = api.trends_place(23424977)
+# for trend in trends_result[0]["trends"]:
+#     print(trend["name"])
+
+# listOfLocationTrends = api.trends_available()
+# for trendLocation in listOfLocationTrends:
+#     name = trendLocation["name"]
+#     id = trendLocation["woeid"]
+#     print(f"{name}:{id}")
