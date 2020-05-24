@@ -1,4 +1,16 @@
 import tweepy
+import json
+
+class MyStreamListener(tweepy.StreamListener):
+    def __init__(self, api):
+        self.api = api
+        self.me = api.me()
+
+    def onStatus(self, tweet):
+        print(f"{tweet.user.name}:{tweet.text}")
+
+    def onError(self, status):
+        print("Error detected")
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler("ZJiRhsMaKX9V1x0jAifoJwoht", 
@@ -8,14 +20,20 @@ auth = tweepy.OAuthHandler("ZJiRhsMaKX9V1x0jAifoJwoht",
 auth.set_access_token("963270419401859072-J050kT7pVfEyzj7fAPbYUDFwC1F17Ep",
     "m26YTzVqfrd5ZqvE6UFHK6kYLrzMDNHt4EyZsT0Rly8Sy")
 
+# Create API object
 api = tweepy.API(auth, wait_on_rate_limit=True,
     wait_on_rate_limit_notify=True)
 
-try:
-    api.verify_credentials()
-    print("authentication OK")
-except:
-    print("Error during authentication")
+# Streaming
+tweetsListener = MyStreamListener(api)
+stream = tweepy.Stream(api.auth, tweetsListener)
+stream.filter(track = ["Python", "Django", "Tweepy"], languages = ["en"])
+
+# try:
+#     api.verify_credentials()
+#     print("authentication OK")
+# except:
+#     print("Error during authentication")
 
 # User timeline
 # timeline = api.home_timeline()
